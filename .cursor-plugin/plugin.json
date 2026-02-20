@@ -1,5 +1,5 @@
 {
-  "name": "oplane",
+  "name": "oplane-plugin",
   "description": "AI-powered security analysis — threat modeling, implementation assessment, and PR security review",
   "version": "1.0.0",
   "author": {
@@ -7,5 +7,6 @@
   },
   "homepage": "https://www.oplane.io",
   "repository": "https://github.com/oplane/oplane-plugin",
-  "keywords": ["security", "threat-modeling", "appsec", "devsecops"]
+  "keywords": ["security", "threat-modeling", "appsec", "devsecops"],
+  "logo": "assets/oplane-app-icon.svg"
 }

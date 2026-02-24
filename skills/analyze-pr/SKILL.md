@@ -10,7 +10,7 @@ $ARGUMENTS
 
 ## Instructions
 
-1. **Verify Oplane MCP tools are available (MANDATORY)** — Call `my_recent_threatmodels` to verify the Oplane MCP connection is working. **If this call fails or the tools are not available, STOP IMMEDIATELY.** Do not proceed with any analysis. Report the error and tell the user to run `/mcp` to check server status and authenticate. Never perform analysis without working Oplane tools — local-only results cannot be persisted and are not acceptable.
+1. **Verify Oplane MCP tools are available (MANDATORY)** — Call `my_recent_threatmodels` to verify the Oplane MCP connection is working. **If this call fails or the tools are not available, STOP IMMEDIATELY.** Do not proceed with any analysis. Report the error and tell the user to check the Oplane MCP server status: in Claude Code run `/mcp`, in Cursor open Settings > MCP. Never perform analysis without working Oplane tools — local-only results cannot be persisted and are not acceptable.
 
 2. **Understand the PR changes** — Review the PR title, description, and linked issues. Examine the diff to understand what changed. Use Read/Grep for additional context from the codebase.
 

@@ -29,9 +29,9 @@ Plus Claude Code's built-in tools (Read, Glob, Grep) for codebase exploration.
 **Before doing anything else**, call `my_recent_threatmodels` to verify the Oplane MCP tools are connected and working.
 
 **If the call fails or the tools are not available, STOP IMMEDIATELY.** Do not proceed with any analysis. Instead, report the error and instruct the user to:
-1. Run `/mcp` in Claude Code to check the Oplane server status
-2. Authenticate if needed (OAuth via `/mcp` or PAT via `claude mcp add`)
-3. Retry after fixing the connection
+- **Claude Code:** Run `/mcp` to check the Oplane server status and authenticate
+- **Cursor:** Open Settings > MCP and verify the Oplane server is enabled and connected
+- Then retry after fixing the connection
 
 **Never perform security analysis without working Oplane MCP tools.** The entire value of this agent is persisting results to Oplane — a local-only analysis is not acceptable.
 

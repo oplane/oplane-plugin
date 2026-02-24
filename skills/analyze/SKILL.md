@@ -10,7 +10,7 @@ $ARGUMENTS
 
 ## Instructions
 
-1. **Verify Oplane MCP tools are available (MANDATORY)** — Call `my_recent_threatmodels` to verify the Oplane MCP connection is working. **If this call fails or the tools are not available, STOP IMMEDIATELY.** Do not proceed with any analysis. Report the error and tell the user to run `/mcp` to check server status and authenticate. Never perform analysis without working Oplane tools — local-only results cannot be persisted and are not acceptable. If the call succeeds, also check for existing threat models to avoid duplicates.
+1. **Verify Oplane MCP tools are available (MANDATORY)** — Call `my_recent_threatmodels` to verify the Oplane MCP connection is working. **If this call fails or the tools are not available, STOP IMMEDIATELY.** Do not proceed with any analysis. Report the error and tell the user to check the Oplane MCP server status: in Claude Code run `/mcp`, in Cursor open Settings > MCP. Never perform analysis without working Oplane tools — local-only results cannot be persisted and are not acceptable. If the call succeeds, also check for existing threat models to avoid duplicates.
 
 2. **Explore the project** — Understand what the application does, its tech stack, architecture, and security-critical components. Read the README, configuration files, route definitions, and key source files.
 

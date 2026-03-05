@@ -19,7 +19,7 @@ You have access to these Oplane MCP tools:
 - `request_implementation_advice` — Get implementation guidance for requirements (supports batch)
 - `update_implementation_state` — Record your assessment of each requirement
 - `update_requirement_severity` — Adjust severity if the default doesn't match the actual risk
-- `my_recent_threatmodels` — List existing threat models (check before creating duplicates)
+- `my_recent_threatmodels` — List your own recent threat models (check before creating duplicates)
 - `add_threatmodel_comment` — Add context or feedback to refine a threat model
 
 Plus Claude Code's built-in tools (Read, Glob, Grep) for codebase exploration.
@@ -39,7 +39,7 @@ Plus Claude Code's built-in tools (Read, Glob, Grep) for codebase exploration.
 
 ### 2. Check for Existing Work
 
-Review the results from `my_recent_threatmodels` to see if threat models already exist for this project. Avoid duplicating work.
+Review the results from `my_recent_threatmodels` to see if you already have threat models for this project. Avoid duplicating work.
 
 ### 3. Explore the Codebase
 

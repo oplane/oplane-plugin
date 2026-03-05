@@ -99,7 +99,7 @@ The plugin provides access to these Oplane MCP tools:
 | `request_implementation_advice` | Get implementation guidance (supports batch) |
 | `update_implementation_state` | Record implementation assessments |
 | `update_requirement_severity` | Adjust severity with motivation |
-| `my_recent_threatmodels` | List existing threat models |
+| `my_recent_threatmodels` | List your own recent threat models |
 | `add_threatmodel_comment` | Add context to refine threat models |
 
 ## License

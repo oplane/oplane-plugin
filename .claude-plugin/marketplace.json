@@ -1,0 +1,27 @@
+{
+  "name": "oplane-plugins",
+  "owner": {
+    "name": "Oplane",
+    "email": "support@oplane.io"
+  },
+  "metadata": {
+    "description": "AI-powered security threat modeling for your codebase"
+  },
+  "plugins": [
+    {
+      "name": "oplane",
+      "source": ".",
+      "description": "AI-powered security analysis — threat modeling, implementation assessment, and PR security review",
+      "version": "1.0.0",
+      "author": {
+        "name": "Oplane"
+      },
+      "homepage": "https://www.oplane.io",
+      "repository": "https://github.com/oplane/oplane-plugin",
+      "license": "Proprietary",
+      "keywords": ["security", "threat-modeling", "appsec", "devsecops", "mcp"],
+      "category": "security",
+      "tags": ["security", "threat-modeling", "code-review", "compliance"]
+    }
+  ]
+}

@@ -11,8 +11,8 @@
     {
       "name": "oplane",
       "source": {
-        "source": "github",
-        "repo": "oplane/oplane-plugin"
+        "source": "git",
+        "url": "https://github.com/oplane/oplane-plugin.git"
       },
       "description": "AI-powered security analysis — threat modeling, implementation assessment, and PR security review",
       "version": "1.0.0",

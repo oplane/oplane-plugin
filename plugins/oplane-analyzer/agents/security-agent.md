@@ -58,10 +58,10 @@ Identify scopes using two approaches:
 - What external systems does it integrate with?
 
 Examples:
-- "User registration and email verification flow"
-- "Process payment via Stripe for an order"
-- "Submit and moderate product reviews"
-- "Admin bulk-imports users from CSV file"
+- "User registration and email verification"
+- "Cart-to-confirmation payment via Stripe"
+- "Product review submission and moderation"
+- "Bulk user import from CSV"
 
 **B. Security-Specific Scopes (secondary)** — Cross-cutting concerns:
 - Authentication and session management

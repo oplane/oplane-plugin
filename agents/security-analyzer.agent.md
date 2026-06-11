@@ -1,5 +1,5 @@
 ---
-name: security-agent
+name: security-analyzer
 description: Security analysis expert that analyzes codebases for threat modeling, assesses security requirement implementation, and reviews pull requests for security implications. Use when performing security analysis, creating threat models, or assessing security posture.
 ---
 

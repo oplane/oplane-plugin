@@ -2,7 +2,7 @@
 
 AI-powered security analysis for your codebase — threat modeling, implementation assessment, and PR security review.
 
-Works with both **Claude Code** and **Cursor**.
+Works with **Claude Code**, **Cursor**, and **GitHub Copilot CLI**.
 
 ## What it does
 
@@ -17,7 +17,7 @@ Results are saved to Oplane and visible in the [Gravity web interface](https://g
 
 ## Prerequisites
 
-- [Claude Code](https://code.claude.com) or [Cursor](https://cursor.com)
+- [Claude Code](https://code.claude.com), [Cursor](https://cursor.com), or [GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli)
 - An [Oplane account](https://gravity.oplane.io)
 
 ## Installation
@@ -31,6 +31,14 @@ claude --plugin-dir /path/to/oplane-plugin
 ### Cursor
 
 Install from the [Cursor Marketplace](https://cursor.com/marketplace) (when available), or load via Cursor Settings > Plugins and add the repository URL.
+
+### GitHub Copilot CLI
+
+```bash
+copilot plugin install /path/to/oplane-plugin
+```
+
+Verify with `copilot plugin list` (or `/plugin list` in an interactive session). Re-run `copilot plugin install` after editing the plugin.
 
 ## Authentication
 
@@ -87,7 +95,7 @@ Analyzes the current PR changes for security implications. Provide context:
 
 ### Security agent
 
-The plugin also provides a `security-agent` subagent that Claude Code can invoke automatically when security analysis is needed.
+The plugin also provides a `security-analyzer` subagent that Claude Code and Copilot CLI can invoke automatically when security analysis is needed.
 
 ## Available tools
 

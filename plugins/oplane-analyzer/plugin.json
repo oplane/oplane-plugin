@@ -1,0 +1,16 @@
+{
+  "name": "oplane",
+  "description": "AI-powered security analysis — threat modeling, implementation assessment, and PR security review",
+  "version": "1.0.0",
+  "author": {
+    "name": "Oplane",
+    "email": "support@oplane.io"
+  },
+  "homepage": "https://www.oplane.io",
+  "repository": "https://github.com/oplane/oplane-plugin",
+  "license": "Proprietary",
+  "keywords": ["security", "threat-modeling", "appsec", "devsecops", "mcp"],
+  "agents": "agents/",
+  "skills": ["skills/"],
+  "mcpServers": ".mcp.json"
+}

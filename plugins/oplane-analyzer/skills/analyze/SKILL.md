@@ -1,4 +1,5 @@
 ---
+name: analyze
 description: Analyze the current project for security threats and generate a threat model with implementation assessments
 ---
 

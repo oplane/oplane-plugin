@@ -1,4 +1,5 @@
 ---
+name: analyze-pr
 description: Analyze a pull request for security implications and assess whether security requirements are addressed
 ---
 

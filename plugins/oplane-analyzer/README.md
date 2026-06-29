@@ -97,6 +97,21 @@ Analyzes the current PR changes for security implications. Provide context:
 
 The plugin also provides a `security-analyzer` subagent that Claude Code and Copilot CLI can invoke automatically when security analysis is needed.
 
+## Recommended setup: CLAUDE.md / AGENTS.md
+
+The single highest-impact step is making threat modeling a standing instruction your agent
+reads every session, so security-relevant changes are modeled before each commit or PR,
+not just reviewed after a PR opens. Add this to your project's `CLAUDE.md` (and/or
+`AGENTS.md`):
+
+```
+For changes that could affect security, you MUST threat-model the change using Oplane MCP
+before committing. Threat-model the actual diff (e.g. the PR threat model), not a written
+summary of it - a model built from your own description only re-tests risks you already
+considered. Explicitly consider untrusted-input-inbound (log/audit/template/SQL injection
+from external data), not only outward data leakage.
+```
+
 ## Available tools
 
 The plugin provides access to these Oplane MCP tools:

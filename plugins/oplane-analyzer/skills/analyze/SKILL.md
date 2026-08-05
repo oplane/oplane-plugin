@@ -29,4 +29,10 @@ $ARGUMENTS
 
 6. **Adjust severity** — If any requirement's severity doesn't match the actual risk context, use `update_requirement_severity` with a motivation note.
 
-7. **Summarize** — Report the number of threat models, total requirements, implementation state breakdown, and key findings.
+7. **Verify completeness before reporting (MANDATORY)** — Call `get_threatmodel` and check that **every** requirement has a non-null `implementation_state`. Do not report from your own memory of which ones you assessed; read the persisted model back and count. If any are unassessed, assess them now and re-check.
+
+   **Regenerating a model CLEARS every existing assessment.** Passing `threatmodel_id` to `new_threatmodel` re-runs generation, and requirements come back with `implementation_state: null` — including ones you assessed minutes earlier and ones whose code did not change. "Their verdicts still stand" is false: the verdicts are gone from the record even when the reasoning is still valid. After ANY regeneration, re-assess the full set, not just the requirements whose code changed. Budget for this before choosing to regenerate — for a small delta, a new model may cost less than re-assessing everything on the old one.
+
+   **PARTIALLY_IMPLEMENTED is not IMPLEMENTED. Neither is NOT_IMPLEMENTED.** A model carrying either is NOT a passing result — never describe the run as green, clean, complete, or ready to merge while one exists, and never let the count of IMPLEMENTED requirements stand in for the outcome. Each non-IMPLEMENTED requirement has exactly two honest resolutions: (a) close the gap in this change so it becomes IMPLEMENTED, or (b) put the decision to the user and, if they accept it, record their decision as `ACCEPTED_RISK` / `OUT_OF_SCOPE` / `NOT_APPLICABLE` with the reason. Leaving it PARTIAL is neither — it is an open gap nobody has agreed to own. Lead the summary with the non-IMPLEMENTED ones and what each still needs; do not bury them under the passing count.
+
+8. **Summarize** — Report the number of threat models, total requirements, implementation state breakdown, and key findings. State the counts from the `get_threatmodel` read in step 7, not from recollection.

@@ -34,4 +34,10 @@ $ARGUMENTS
 
 6. **Adjust severity** — Use `update_requirement_severity` if the default doesn't match the actual risk for this PR's context.
 
-7. **Summarize** — Report the number of requirements, implementation state breakdown, and key findings with recommendations for the PR author.
+7. **Verify completeness before reporting (MANDATORY)** — Call `get_threatmodel` and confirm **every** requirement has a non-null `implementation_state`. Read the persisted model back and count; do not report from your own memory of what you assessed. Assess any that are missing, then re-check.
+
+   **Regenerating a model CLEARS every existing assessment.** Passing `threatmodel_id` to `new_threatmodel` (e.g. after pushing review fixes to the PR) re-runs generation and returns every requirement with `implementation_state: null` — including ones already assessed and ones whose code did not change. After ANY regeneration, re-assess the full set, not just what changed.
+
+   **PARTIALLY_IMPLEMENTED is not IMPLEMENTED. Neither is NOT_IMPLEMENTED.** A PR whose model carries either is NOT green and NOT ready to merge — never report it as such, and never let the IMPLEMENTED count stand in for the outcome. Each non-IMPLEMENTED requirement has two honest resolutions: fix it in this PR so it becomes IMPLEMENTED, or put the decision to the user and record their answer as `ACCEPTED_RISK` / `OUT_OF_SCOPE` / `NOT_APPLICABLE` with the reason. Leaving it PARTIAL is an open gap nobody has agreed to own. Lead the summary with those and what each still needs.
+
+8. **Summarize** — Report the number of requirements, implementation state breakdown, and key findings with recommendations for the PR author. Use the counts from step 7's read, not recollection.

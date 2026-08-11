@@ -8,5 +8,12 @@
   "homepage": "https://www.oplane.io",
   "repository": "https://github.com/oplane/oplane-plugin",
   "keywords": ["security", "threat-modeling", "appsec", "devsecops"],
-  "logo": "assets/oplane-app-icon.svg"
+  "logo": "assets/oplane-app-icon.svg",
+  "skills": ["skills/"],
+  "agents": "agents/",
+  "mcpServers": {
+    "oplane": {
+      "url": "https://gravity.oplane.io/mcp/"
+    }
+  }
 }

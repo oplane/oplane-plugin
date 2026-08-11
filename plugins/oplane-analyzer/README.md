@@ -2,7 +2,7 @@
 
 AI-powered security analysis for your codebase — threat modeling, implementation assessment, and PR security review.
 
-Works with **Claude Code**, **Cursor**, and **GitHub Copilot CLI**.
+Works with **Claude Code**, **Cursor**, **GitHub Copilot CLI**, and **opencode**.
 
 ## What it does
 
@@ -17,7 +17,7 @@ Results are saved to Oplane and visible in the [Gravity web interface](https://g
 
 ## Prerequisites
 
-- [Claude Code](https://code.claude.com), [Cursor](https://cursor.com), or [GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli)
+- [Claude Code](https://code.claude.com), [Cursor](https://cursor.com), [GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli), or [opencode](https://opencode.ai)
 - An [Oplane account](https://gravity.oplane.io)
 
 ## Installation
@@ -39,6 +39,10 @@ copilot plugin install /path/to/oplane-plugin
 ```
 
 Verify with `copilot plugin list` (or `/plugin list` in an interactive session). Re-run `copilot plugin install` after editing the plugin.
+
+### opencode
+
+opencode has no plugin/marketplace mechanism — it loads skills from a directory and MCP servers from its config file, so installation is manual. See [`opencode/README.md`](opencode/README.md) for the copy-paste `curl` commands to install the skills into `~/.config/opencode/skills/` and the MCP config to add.
 
 ## Authentication
 
@@ -95,7 +99,7 @@ Analyzes the current PR changes for security implications. Provide context:
 
 ### Security agent
 
-The plugin also provides a `security-analyzer` subagent that Claude Code and Copilot CLI can invoke automatically when security analysis is needed.
+The plugin also provides a `security-analyzer` subagent that Claude Code, Copilot CLI, and opencode can invoke automatically when security analysis is needed.
 
 ## Recommended setup: CLAUDE.md / AGENTS.md
 

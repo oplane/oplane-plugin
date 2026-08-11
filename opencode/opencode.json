@@ -1,0 +1,10 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "oplane": {
+      "type": "remote",
+      "url": "https://gravity.oplane.io/mcp/",
+      "enabled": true
+    }
+  }
+}

@@ -24,8 +24,11 @@ Results are saved to Oplane and visible in the [Gravity web interface](https://g
 
 ### Claude Code
 
+From inside Claude Code:
+
 ```bash
-claude --plugin-dir /path/to/oplane-plugin
+/plugin marketplace add oplane/oplane-plugin
+/plugin install oplane@oplane-plugins
 ```
 
 ### Cursor

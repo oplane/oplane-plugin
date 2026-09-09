@@ -2,7 +2,7 @@
 
 AI-powered security analysis for your codebase — threat modeling, implementation assessment, and PR security review.
 
-Works with **Claude Code**, **Cursor**, **GitHub Copilot CLI**, and **opencode**.
+Works with **Claude Code**, **Cursor**, **GitHub Copilot CLI**, **opencode**, and **Codex**.
 
 ## What it does
 
@@ -17,7 +17,7 @@ Results are saved to Oplane and visible in the [Gravity web interface](https://g
 
 ## Prerequisites
 
-- [Claude Code](https://code.claude.com), [Cursor](https://cursor.com), [GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli), or [opencode](https://opencode.ai)
+- [Claude Code](https://code.claude.com), [Cursor](https://cursor.com), [GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli), [opencode](https://opencode.ai), or [Codex](https://developers.openai.com/codex)
 - An [Oplane account](https://gravity.oplane.io)
 
 ## Installation
@@ -46,6 +46,16 @@ Verify with `copilot plugin list` (or `/plugin list` in an interactive session).
 ### opencode
 
 opencode has no plugin/marketplace mechanism — it loads skills from a directory and MCP servers from its config file, so installation is manual. See [`opencode/README.md`](opencode/README.md) for the copy-paste `curl` commands to install the skills into `~/.config/opencode/skills/` and the MCP config to add.
+
+### Codex
+
+From your terminal:
+
+```bash
+codex plugin marketplace add oplane/oplane-plugin
+```
+
+Then start Codex, run `/plugins`, select **oplane**, and install it. Restart your Codex session so the bundled skills and MCP server load, then authenticate with `codex mcp login oplane`. See [`codex/README.md`](codex/README.md) for details. Codex has no subagent, so the `security-analyzer` agent is not included — its skills cover the workflow.
 
 ## Authentication
 

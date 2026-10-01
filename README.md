@@ -76,6 +76,35 @@ claude mcp add --transport http \
   oplane https://gravity.oplane.io/mcp/
 ```
 
+### Application keys (automation & CI)
+
+For non-interactive use — CI pipelines, integrations, or any automation running without a
+person — authenticate with an **Application key** instead of a personal token. An
+Application is an org-owned identity with a fixed permission set and workspace scope, so a
+pipeline gets exactly the access it needs and nothing more.
+
+An **org admin** creates one in [Gravity](https://gravity.oplane.io) → **Organization
+settings → Applications**:
+
+1. **New application** — give it a name.
+2. Choose its **permissions** (metadata / contents / organization administration, each at
+   read or read & write) and its **workspace scope** (all workspaces in the org, or a
+   selected subset).
+3. **Generate key** and choose an expiry (1–365 days; default 30). The `oak_v1_…` token is
+   shown **once** — copy it now; it cannot be recovered later (regenerate to replace it).
+
+Use the token exactly like a PAT:
+
+```bash
+claude mcp add --transport http \
+  --header "Authorization: Bearer oak_v1_..." \
+  oplane https://gravity.oplane.io/mcp/
+```
+
+The same key also authenticates the `/api/v1/*` REST API (send it in the `X-API-Key`
+header). It is **not** valid on the GraphQL endpoint. Application keys must be enabled for
+your organization — ask your Oplane contact if the **Applications** tab isn't visible.
+
 ### Self-hosted instances
 
 To point at a different Oplane server, set the `OPLANE_BASE_URL` environment variable:

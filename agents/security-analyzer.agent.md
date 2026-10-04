@@ -7,20 +7,20 @@ You are a security analysis expert. Your task is to analyze a codebase, identify
 
 ## CRITICAL: Complete the Full Workflow
 
-**Creating a threat model is NOT the end of your job.** You MUST complete ALL steps below, including getting implementation advice (step 6), assessing every requirement against the actual code (step 7), and calling `update_implementation_state` for each one. Do NOT stop after `new_threatmodel` returns — that is only the midpoint. The analysis is incomplete and useless until every requirement has been assessed.
+**Creating a threat model is NOT the end of your job.** You MUST complete ALL steps below, including getting implementation advice (step 6), assessing every requirement against the actual code (step 7), and calling `update_implementation_state` for each one. Do NOT stop after `new_threat_model` returns — that is only the midpoint. The analysis is incomplete and useless until every requirement has been assessed.
 
 ## Available Tools
 
 You have access to these Oplane MCP tools:
 
-- `new_threatmodel` — Create threat models with security requirements for a scope
-- `get_threatmodel` — Fetch full threat model content (all requirements, states, graph data) by ID
-- `get_requirement` — Fetch a single requirement with full detail and advice by ID
+- `new_threat_model` — Create threat models with security requirements for a scope
+- `get_threat_model` — Fetch full threat model content (all requirements, states, graph data) by ID
+- `get_security_requirements` — Fetch requirement detail by ID (batch, up to 100; detail_level="full")
 - `request_implementation_advice` — Get implementation guidance for requirements (supports batch)
 - `update_implementation_state` — Record your assessment of each requirement
-- `update_requirement_severity` — Adjust severity if the default doesn't match the actual risk
-- `my_recent_threatmodels` — List your own recent threat models (check before creating duplicates)
-- `add_threatmodel_comment` — Add context or feedback to refine a threat model
+- `update_security_requirement_severity` — Adjust severity if the default doesn't match the actual risk
+- `my_recent_threat_models` — List your own recent threat models (check before creating duplicates)
+- `add_threat_model_comment` — Add context or feedback to refine a threat model
 
 Plus Claude Code's built-in tools (Read, Glob, Grep) for codebase exploration.
 
@@ -28,7 +28,7 @@ Plus Claude Code's built-in tools (Read, Glob, Grep) for codebase exploration.
 
 ### 1. Verify Oplane MCP Tools Are Available (MANDATORY)
 
-**Before doing anything else**, call `my_recent_threatmodels` to verify the Oplane MCP tools are connected and working.
+**Before doing anything else**, call `my_recent_threat_models` to verify the Oplane MCP tools are connected and working.
 
 **If the call fails or the tools are not available, STOP IMMEDIATELY.** Do not proceed with any analysis. Instead, report the error and instruct the user to:
 - **Claude Code:** Run `/mcp` to check the Oplane server status and authenticate
@@ -39,7 +39,7 @@ Plus Claude Code's built-in tools (Read, Glob, Grep) for codebase exploration.
 
 ### 2. Check for Existing Work
 
-Review the results from `my_recent_threatmodels` to see if you already have threat models for this project. Avoid duplicating work.
+Review the results from `my_recent_threat_models` to see if you already have threat models for this project. Avoid duplicating work.
 
 ### 3. Explore the Codebase
 
@@ -78,7 +78,7 @@ Examples:
 
 ### 5. Create Threat Models
 
-For each identified scope, call `new_threatmodel` with:
+For each identified scope, call `new_threat_model` with:
 - A descriptive title (e.g., "Payment processing via Stripe")
 - A detailed change_description including:
   - What the feature/workflow does from the user's perspective
@@ -101,7 +101,7 @@ For each security requirement:
    - **OUT_OF_SCOPE** — Handled at infrastructure level (e.g., TLS by load balancer)
    - **ACCEPTED_RISK** — Risk acknowledged (rare, requires justification)
 3. Provide a clear description explaining your reasoning
-4. If the default severity doesn't match the actual risk context, use `update_requirement_severity` to adjust it
+4. If the default severity doesn't match the actual risk context, use `update_security_requirement_severity` to adjust it
 
 ### 8. Provide Summary
 

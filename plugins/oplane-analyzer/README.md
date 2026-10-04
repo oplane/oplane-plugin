@@ -164,12 +164,12 @@ The plugin provides access to these Oplane MCP tools:
 
 | Tool | Description |
 |------|-------------|
-| `new_threatmodel` | Create threat models with security requirements |
+| `new_threat_model` | Create threat models with security requirements |
 | `request_implementation_advice` | Get implementation guidance (supports batch) |
 | `update_implementation_state` | Record implementation assessments |
-| `update_requirement_severity` | Adjust severity with motivation |
-| `my_recent_threatmodels` | List your own recent threat models |
-| `add_threatmodel_comment` | Add context to refine threat models |
+| `update_security_requirement_severity` | Adjust severity with motivation |
+| `my_recent_threat_models` | List your own recent threat models |
+| `add_threat_model_comment` | Add context to refine threat models |
 
 ## License
 

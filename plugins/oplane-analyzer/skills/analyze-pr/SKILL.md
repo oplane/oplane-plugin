@@ -25,11 +25,13 @@ $ARGUMENTS
 5. **Assess each requirement** — For every requirement:
    - Check if the PR changes address it
    - Call `update_implementation_state` with one of:
-     - **IMPLEMENTED** — Security control is present in the PR changes
-     - **PARTIALLY_IMPLEMENTED** — Some aspects addressed, others missing
-     - **NOT_IMPLEMENTED** — No evidence in the PR changes
-     - **OUT_OF_SCOPE** — Handled elsewhere (infrastructure, separate PR)
-     - **ACCEPTED_RISK** — Explicitly accepted in PR description/comments
+     - IMPLEMENTED: the essence of the requirement is addressed correctly (good enough). Only minor gaps remain, e.g. additional-case FAILs: name them, don't downgrade.
+     - PARTIALLY_IMPLEMENTED: significant parts are addressed, but serious holes remain, i.e. a primary case FAILs.
+     - NOT_IMPLEMENTED: the requirement is not addressed; nothing significant is in place.
+     - OUT_OF_SCOPE: handled elsewhere (e.g. infrastructure, API gateway).
+     - ACCEPTED_RISK: risk acknowledged, not mitigated.
+     - NOT_APPLICABLE: does not apply to this context.
+     ACCEPTED_RISK only when explicitly accepted in the PR description/comments.
    - Reference specific files and line changes in your description
 
 6. **Adjust severity** — Use `update_security_requirement_severity` if the default doesn't match the actual risk for this PR's context.

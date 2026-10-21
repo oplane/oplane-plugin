@@ -94,11 +94,13 @@ Call `request_implementation_advice` with requirement IDs in batches of **3–5 
 For each security requirement:
 1. Use Read and Grep to check if the requirement is implemented
 2. Call `update_implementation_state` with your assessment:
-   - **IMPLEMENTED** — Security control is present and correct
-   - **PARTIALLY_IMPLEMENTED** — Some controls exist but incomplete
-   - **NOT_IMPLEMENTED** — No implementation found
-   - **OUT_OF_SCOPE** — Handled at infrastructure level (e.g., TLS by load balancer)
-   - **ACCEPTED_RISK** — Risk acknowledged (rare, requires justification)
+   - IMPLEMENTED: the essence of the requirement is addressed correctly (good enough). Only minor gaps remain, e.g. additional-case FAILs: name them, don't downgrade.
+   - PARTIALLY_IMPLEMENTED: significant parts are addressed, but serious holes remain, i.e. a primary case FAILs.
+   - NOT_IMPLEMENTED: the requirement is not addressed; nothing significant is in place.
+   - OUT_OF_SCOPE: handled elsewhere (e.g. infrastructure, API gateway).
+   - ACCEPTED_RISK: risk acknowledged, not mitigated.
+   - NOT_APPLICABLE: does not apply to this context.
+   ACCEPTED_RISK is rare and requires justification.
 3. Provide a clear description explaining your reasoning
 4. If the default severity doesn't match the actual risk context, use `update_security_requirement_severity` to adjust it
 

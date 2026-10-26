@@ -88,8 +88,9 @@ settings → Applications**:
 
 1. **New application** — give it a name.
 2. Choose its **permissions** (metadata / contents / organization administration, each at
-   read or read & write) and its **workspace scope** (all workspaces in the org, or a
-   selected subset).
+   read or read & write), its **workspace scope** (all workspaces in the org, or a
+   selected subset) and its **interface access** (every interface, or only the selected
+   ones: the Oplane MCP, the Lovable MCP, the automation MCP, the REST API).
 3. **Generate key** and choose an expiry (1–365 days; default 30). The `oak_v1_…` token is
    shown **once** — copy it now; it cannot be recovered later (regenerate to replace it).
 
@@ -102,7 +103,8 @@ claude mcp add --transport http \
 ```
 
 The same key also authenticates the `/api/v1/*` REST API (send it in the `X-API-Key`
-header). It is **not** valid on the GraphQL endpoint. Application keys must be enabled for
+header). On an interface its application may not use, the key is refused like an invalid
+token. It is **not** valid on the GraphQL endpoint. Application keys must be enabled for
 your organization — ask your Oplane contact if the **Applications** tab isn't visible.
 
 ### Self-hosted instances

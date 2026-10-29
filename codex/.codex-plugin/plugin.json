@@ -1,22 +1,97 @@
 {
   "name": "oplane",
   "description": "AI-powered security analysis — threat modeling, implementation assessment, and PR security review",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": {
     "name": "Oplane",
-    "email": "support@oplane.io"
+    "email": "support@oplane.io",
+    "url": "https://www.oplane.com"
   },
   "homepage": "https://www.oplane.io",
   "repository": "https://github.com/oplane/oplane-plugin",
-  "license": "Proprietary",
+  "license": "Apache-2.0",
   "keywords": ["security", "threat-modeling", "appsec", "devsecops", "mcp"],
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Oplane Security",
-    "shortDescription": "AI-powered security threat modeling for your codebase",
-    "category": "security",
-    "websiteURL": "https://www.oplane.io",
+    "shortDescription": "Threat modeling for your code",
+    "longDescription": "Oplane threat-models the code you are working on. Ask Codex to analyze a project or a pull request and the plugin creates a threat model in Oplane, lists the security requirements for the change, and checks each one against your actual code, recording whether it is implemented. Results are saved to your Oplane account and shown in the Oplane web app, where your team can review them.\n\nIt is for developers and security engineers who want security review while they code, before a change is merged. You need an Oplane account; the plugin signs in with OAuth. The plugin sends the change descriptions and code context it needs to Oplane (gravity.oplane.io), and it can only see threat models in the Oplane workspaces your account can access.",
+    "developerName": "Oplane",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Create threat models",
+      "Assess security requirements",
+      "Review pull requests for security"
+    ],
+    "websiteURL": "https://www.oplane.com",
+    "supportURL": "https://www.oplane.com/docs/reference/agent-plugins",
+    "privacyPolicyURL": "https://www.oplane.com/legal/privacy-policy",
+    "termsOfServiceURL": "https://www.oplane.com/legal/terms-of-service",
+    "defaultPrompt": [
+      "Analyze this project for security threats with Oplane.",
+      "Threat model this pull request with Oplane."
+    ],
+    "composerIcon": "./assets/oplane-app-icon.svg",
     "logo": "./assets/oplane-app-icon.svg"
+  },
+  "extensions": {
+    "com.openai": {
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Threat model a described change",
+              "prompt": "Use Oplane to threat model this change: we are adding a password reset flow that emails a one-time link to the user.",
+              "tools_triggered": "my_recent_threat_models, new_threat_model",
+              "expected_behavior": "Creates a threat model in Oplane for the password reset flow and lists the generated security requirements with their severity."
+            },
+            {
+              "description": "Get implementation advice for requirements",
+              "prompt": "Get Oplane implementation advice for the requirements in the threat model you just created.",
+              "tools_triggered": "request_implementation_advice",
+              "expected_behavior": "Returns implementation guidance and verification cases for the requirements, fetched in small batches."
+            },
+            {
+              "description": "Record an implementation assessment",
+              "prompt": "Mark the first requirement of that threat model as not implemented in Oplane, because the reset link has no expiry yet.",
+              "tools_triggered": "update_implementation_state",
+              "expected_behavior": "Records the requirement as NOT_IMPLEMENTED with the given reason and confirms the update."
+            },
+            {
+              "description": "List recent threat models",
+              "prompt": "Show my recent Oplane threat models.",
+              "tools_triggered": "my_recent_threat_models",
+              "expected_behavior": "Lists the threat models the test account created recently, with titles and links to the Oplane web app."
+            },
+            {
+              "description": "Add context to a threat model",
+              "prompt": "Add a comment to that Oplane threat model saying the reset emails are sent through our own SMTP relay.",
+              "tools_triggered": "add_threat_model_comment",
+              "expected_behavior": "Adds the comment to the threat model and confirms it was saved."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Request unrelated to security analysis",
+              "prompt": "Book me a table for two at an Italian restaurant tonight."
+            },
+            {
+              "description": "Deleting data the plugin cannot delete",
+              "prompt": "Delete all of my Oplane threat models."
+            },
+            {
+              "description": "Access outside the connected account",
+              "prompt": "Show me the threat models of another company's Oplane organization."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "Oplane does not sell products or process payments through this plugin."
+      },
+      "publication": {
+        "release_notes": "First directory release: skills to threat-model a project or a pull request with Oplane, assess each security requirement against the code, and record the results in Oplane."
+      }
+    }
   }
 }

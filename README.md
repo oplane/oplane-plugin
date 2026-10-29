@@ -107,14 +107,6 @@ header). On an interface its application may not use, the key is refused like an
 token. It is **not** valid on the GraphQL endpoint. Application keys must be enabled for
 your organization — ask your Oplane contact if the **Applications** tab isn't visible.
 
-### Self-hosted instances
-
-To point at a different Oplane server, set the `OPLANE_BASE_URL` environment variable:
-
-```bash
-export OPLANE_BASE_URL=https://your-oplane-instance.com
-```
-
 ## Usage
 
 ### Analyze a codebase
@@ -162,17 +154,29 @@ from external data), not only outward data leakage.
 
 ## Available tools
 
-The plugin provides access to these Oplane MCP tools:
+The plugin connects your agent to the Oplane MCP server, which provides the tools the skills
+use (create a threat model, get implementation advice, record assessments, and more). For the
+full list, see the [MCP tool reference](https://www.oplane.com/docs/reference/mcp-tools).
 
-| Tool | Description |
-|------|-------------|
-| `new_threat_model` | Create threat models with security requirements |
-| `request_implementation_advice` | Get implementation guidance (supports batch) |
-| `update_implementation_state` | Record implementation assessments |
-| `update_security_requirement_severity` | Adjust severity with motivation |
-| `my_recent_threat_models` | List your own recent threat models |
-| `add_threat_model_comment` | Add context to refine threat models |
+## What the plugin sends
+
+The plugin connects your agent to Oplane's MCP server at `https://gravity.oplane.io/mcp/`.
+When you run an analysis, your agent sends Oplane:
+
+- titles and descriptions of the code or change it is threat modeling, which can include
+  short code excerpts
+- git details such as the repository URL, branch, commit SHA and pull request URL
+- the assessment it records for each security requirement, with file and line references
+
+The plugin sends nothing to any other service. It has no hooks or scripts that run on your
+machine: the skills and the agent are instructions your agent follows. Oplane stores the
+results in your account, as described in the
+[privacy policy](https://www.oplane.com/legal/privacy-policy).
+
+## Support
+
+See the [Oplane agent plugins documentation](https://www.oplane.com/docs/reference/agent-plugins) or email [support@oplane.io](mailto:support@oplane.io).
 
 ## License
 
-Proprietary. See [Oplane](https://www.oplane.io) for terms.
+Apache License 2.0. See [LICENSE](LICENSE).

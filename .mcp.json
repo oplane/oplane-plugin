@@ -2,7 +2,7 @@
   "mcpServers": {
     "oplane": {
       "type": "http",
-      "url": "${OPLANE_BASE_URL:-https://gravity.oplane.io}/mcp/"
+      "url": "https://gravity.oplane.io/mcp/"
     }
   }
 }

@@ -10,5 +10,8 @@
   "repository": "https://github.com/oplane/oplane-plugin",
   "license": "Apache-2.0",
   "privacyPolicyUrl": "https://www.oplane.com/legal/privacy-policy",
+  "termsOfServiceUrl": "https://www.oplane.com/legal/terms-of-service",
+  "documentationUrl": "https://www.oplane.com/docs",
+  "supportUrl": "https://www.oplane.com/docs/reference/agent-plugins",
   "keywords": ["security", "threat-modeling", "appsec", "devsecops"]
 }

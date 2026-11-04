@@ -9,5 +9,6 @@
   "homepage": "https://www.oplane.io",
   "repository": "https://github.com/oplane/oplane-plugin",
   "license": "Apache-2.0",
+  "privacyPolicyUrl": "https://www.oplane.com/legal/privacy-policy",
   "keywords": ["security", "threat-modeling", "appsec", "devsecops"]
 }

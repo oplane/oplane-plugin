@@ -1,7 +1,7 @@
 {
   "name": "oplane",
   "description": "AI-powered security analysis — threat modeling, implementation assessment, and PR security review",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "author": {
     "name": "Oplane",
     "email": "support@oplane.io",
@@ -91,7 +91,7 @@
         "commerce_description": "Oplane does not sell products or process payments through this plugin."
       },
       "publication": {
-        "release_notes": "First directory release (1.1.1): skills to threat-model a project or a pull request with Oplane, assess each security requirement against the code, and record the results in Oplane. This version adds the review test cases and demo recording for directory review."
+        "release_notes": "First directory release (1.1.2): skills to threat-model a project or a pull request with Oplane, assess each security requirement against the code, and record the results in Oplane. This version adds the review test cases and demo recording for directory review, and declares OAuth with dynamic client registration for the MCP server."
       }
     }
   }

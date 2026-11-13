@@ -5,7 +5,7 @@ description: Analyze a pull request for security implications and assess whether
 
 Analyze this pull request for security implications and create a threat model.
 
-**IMPORTANT: You MUST complete ALL steps below.** Creating the threat model (step 3) is only the midpoint — you MUST also get implementation advice, assess every requirement against the actual code, and call `update_implementation_state` for each one. Do NOT stop after `new_threat_model` returns.
+**IMPORTANT: You MUST complete ALL steps below.** Creating the threat model (step 3) is only the midpoint — you MUST also grade every requirement's severity with `update_security_requirement_severity`, get implementation advice, assess every requirement against the actual code, and call `update_implementation_state` for each one. Do NOT stop after `new_threat_model` returns.
 
 ## Instructions
 
@@ -18,9 +18,11 @@ Analyze this pull request for security implications and create a threat model.
    - change_description: comprehensive description of what changed, why, and what's affected
    - Include PR metadata if available (pull_request_url, git_repositories, etc.)
 
-4. **Get implementation advice** — Call `request_implementation_advice` in batches of **3–5 IDs at a time** (not all at once — large batches exceed output limits).
+4. **Assess severity** — Grade every requirement's severity before you assess its implementation. Every new requirement starts `Undetermined`. For each requirement, read the code to judge what this gap alone gives an attacker (impact) and who can carry out the attack once the requirement's control is removed (reachability). Then call `update_security_requirement_severity` with the `severity` the rubric in that tool's description gives, plus `impact`, `reachability` and a `note` in the format the tool specifies. Grade the threat as if the requirement's mitigation were absent: a control you find, including one this PR adds, never lowers the severity, and a fix never changes it. A requirement that makes no sense here (nobody can reach the code path, or it is irrelevant) is graded `NotApplicable`, with reachability `not_applicable`.
 
-5. **Assess each requirement** — For every requirement:
+5. **Get implementation advice** — Call `request_implementation_advice` in batches of **3–5 IDs at a time** (not all at once — large batches exceed output limits).
+
+6. **Assess implementation status** — For every requirement:
    - Check if the PR changes address it
    - Call `update_implementation_state` with one of:
      - IMPLEMENTED: the essence of the requirement is addressed correctly (good enough). Only minor gaps remain, e.g. additional-case FAILs: name them, don't downgrade.
@@ -32,12 +34,10 @@ Analyze this pull request for security implications and create a threat model.
      ACCEPTED_RISK only when explicitly accepted in the PR description/comments.
    - Reference specific files and line changes in your description
 
-6. **Adjust severity** — Use `update_security_requirement_severity` if the default doesn't match the actual risk for this PR's context.
+7. **Verify completeness before reporting (MANDATORY)** — Call `get_threat_model` and confirm **every** requirement has a non-null `implementation_state` and a severity other than `Undetermined`. Read the persisted model back and count; do not report from your own memory of what you assessed. Grade or assess any that are missing, then re-check.
 
-7. **Verify completeness before reporting (MANDATORY)** — Call `get_threat_model` and confirm **every** requirement has a non-null `implementation_state`. Read the persisted model back and count; do not report from your own memory of what you assessed. Assess any that are missing, then re-check.
-
-   **Regenerating a model CLEARS every existing assessment.** Passing `threat_model_id` to `new_threat_model` (e.g. after pushing review fixes to the PR) re-runs generation and returns every requirement with `implementation_state: null` — including ones already assessed and ones whose code did not change. After ANY regeneration, re-assess the full set, not just what changed.
+   **Regenerating a model CLEARS every existing assessment.** Passing `threat_model_id` to `new_threat_model` (e.g. after pushing review fixes to the PR) re-runs generation and returns every requirement with `implementation_state: null` — including ones already assessed and ones whose code did not change. After ANY regeneration, re-assess the full set, not just what changed. Severity grades are kept: grade the requirements that are still `Undetermined`, and change a kept grade only when its impact or reachability has changed.
 
    **PARTIALLY_IMPLEMENTED is not IMPLEMENTED. Neither is NOT_IMPLEMENTED.** A PR whose model carries either is NOT green and NOT ready to merge — never report it as such, and never let the IMPLEMENTED count stand in for the outcome. Each non-IMPLEMENTED requirement has two honest resolutions: fix it in this PR so it becomes IMPLEMENTED, or put the decision to the user and record their answer as `ACCEPTED_RISK` / `OUT_OF_SCOPE` / `NOT_APPLICABLE` with the reason. Leaving it PARTIAL is an open gap nobody has agreed to own. Lead the summary with those and what each still needs.
 
-8. **Summarize** — Report the number of requirements, implementation state breakdown, and key findings with recommendations for the PR author. Use the counts from step 7's read, not recollection.
+8. **Summarize** — Report the number of requirements, severity and implementation state breakdowns, and key findings with recommendations for the PR author. Use the counts from step 7's read, not recollection.

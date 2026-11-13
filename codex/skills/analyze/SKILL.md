@@ -5,7 +5,7 @@ description: Analyze the current project for security threats and generate a thr
 
 Perform a security threat model analysis on this codebase.
 
-**IMPORTANT: You MUST complete ALL steps below.** Creating the threat model (step 4) is only the midpoint — you MUST also get implementation advice, assess every requirement against the actual code, and call `update_implementation_state` for each one. Do NOT stop after `new_threat_model` returns.
+**IMPORTANT: You MUST complete ALL steps below.** Creating the threat model (step 4) is only the midpoint — you MUST also grade every requirement's severity with `update_security_requirement_severity`, get implementation advice, assess every requirement against the actual code, and call `update_implementation_state` for each one. Do NOT stop after `new_threat_model` returns.
 
 ## Instructions
 
@@ -20,17 +20,17 @@ Perform a security threat model analysis on this codebase.
 
 4. **Create threat models** — Call `new_threat_model` for each scope with a descriptive title and detailed change_description covering data flows, external services, and what could go wrong.
 
-5. **Assess every requirement** — For each generated requirement:
+5. **Assess severity** — Grade every requirement's severity before you assess its implementation. Every new requirement starts `Undetermined`. For each requirement, read the code to judge what this gap alone gives an attacker (impact) and who can carry out the attack once the requirement's control is removed (reachability). Then call `update_security_requirement_severity` with the `severity` the rubric in that tool's description gives, plus `impact`, `reachability` and a `note` in the format the tool specifies. Grade the threat as if the requirement's mitigation were absent: a control you find never lowers the severity, and a fix never changes it. A requirement that makes no sense here (nobody can reach the code path, or it is irrelevant) is graded `NotApplicable`, with reachability `not_applicable`.
+
+6. **Assess implementation status** — For each requirement:
    a. Call `request_implementation_advice` in batches of **3–5 IDs** (not all at once — large batches exceed output limits)
    b. Search the codebase to verify implementation
    c. Call `update_implementation_state` with your assessment and explanation
 
-6. **Adjust severity** — If any requirement's severity doesn't match the actual risk context, use `update_security_requirement_severity` with a motivation note.
+7. **Verify completeness before reporting (MANDATORY)** — Call `get_threat_model` and check that **every** requirement has a non-null `implementation_state` and a severity other than `Undetermined`. Do not report from your own memory of which ones you assessed; read the persisted model back and count. If any are unassessed or ungraded, finish them now and re-check.
 
-7. **Verify completeness before reporting (MANDATORY)** — Call `get_threat_model` and check that **every** requirement has a non-null `implementation_state`. Do not report from your own memory of which ones you assessed; read the persisted model back and count. If any are unassessed, assess them now and re-check.
-
-   **Regenerating a model CLEARS every existing assessment.** Passing `threat_model_id` to `new_threat_model` re-runs generation, and requirements come back with `implementation_state: null` — including ones you assessed minutes earlier and ones whose code did not change. "Their verdicts still stand" is false: the verdicts are gone from the record even when the reasoning is still valid. After ANY regeneration, re-assess the full set, not just the requirements whose code changed. Budget for this before choosing to regenerate — for a small delta, a new model may cost less than re-assessing everything on the old one.
+   **Regenerating a model CLEARS every existing assessment.** Passing `threat_model_id` to `new_threat_model` re-runs generation, and requirements come back with `implementation_state: null` — including ones you assessed minutes earlier and ones whose code did not change. "Their verdicts still stand" is false: the verdicts are gone from the record even when the reasoning is still valid. After ANY regeneration, re-assess the full set, not just the requirements whose code changed. Severity grades are kept: grade the requirements that are still `Undetermined`, and change a kept grade only when its impact or reachability has changed. Budget for this before choosing to regenerate — for a small delta, a new model may cost less than re-assessing everything on the old one.
 
    **PARTIALLY_IMPLEMENTED is not IMPLEMENTED. Neither is NOT_IMPLEMENTED.** A model carrying either is NOT a passing result — never describe the run as green, clean, complete, or ready to merge while one exists, and never let the count of IMPLEMENTED requirements stand in for the outcome. Each non-IMPLEMENTED requirement has exactly two honest resolutions: (a) close the gap in this change so it becomes IMPLEMENTED, or (b) put the decision to the user and, if they accept it, record their decision as `ACCEPTED_RISK` / `OUT_OF_SCOPE` / `NOT_APPLICABLE` with the reason. Leaving it PARTIAL is neither — it is an open gap nobody has agreed to own. Lead the summary with the non-IMPLEMENTED ones and what each still needs; do not bury them under the passing count.
 
-8. **Summarize** — Report the number of threat models, total requirements, implementation state breakdown, and key findings. State the counts from the `get_threat_model` read in step 7, not from recollection.
+8. **Summarize** — Report the number of threat models, total requirements, severity and implementation state breakdowns, and key findings. State the counts from the `get_threat_model` read in step 7, not from recollection.

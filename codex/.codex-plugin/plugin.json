@@ -1,7 +1,7 @@
 {
   "name": "oplane",
   "description": "AI-powered security analysis — threat modeling, implementation assessment, and PR security review",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "author": {
     "name": "Oplane",
     "email": "support@oplane.io",
@@ -43,8 +43,8 @@
             {
               "description": "Threat model a described change",
               "prompt": "Use Oplane to threat model this change: we are adding a password reset flow that emails a one-time link to the user.",
-              "tools_triggered": "my_recent_threat_models, new_threat_model, get_threat_model, request_implementation_advice, update_implementation_state",
-              "expected_behavior": "Creates a threat model in Oplane for the password reset flow (or, if a matching one already exists, reuses it instead of creating a duplicate) and lists the security requirements with their severity. When run inside a code repository (Codex), the Oplane skill also gets implementation advice for each requirement and records whether the code implements it; without a repository only the first two tools are needed."
+              "tools_triggered": "my_recent_threat_models, new_threat_model, get_threat_model, update_security_requirement_severity, request_implementation_advice, update_implementation_state",
+              "expected_behavior": "Creates a threat model in Oplane for the password reset flow (or, if a matching one already exists, reuses it instead of creating a duplicate) and lists its security requirements, each starting with severity Undetermined. When run inside a code repository (Codex), the Oplane skill also grades each requirement's severity from its impact and reachability, gets implementation advice for it, and records whether the code implements it; without a repository only the first two tools are needed."
             },
             {
               "description": "Show the architecture Oplane modeled",
@@ -68,7 +68,7 @@
               "description": "Security metrics across the organization",
               "prompt": "Using Oplane, how many open security requirements do we have, broken down by severity?",
               "tools_triggered": "analyze",
-              "expected_behavior": "Returns the total number of open security requirements in the test account's organization and the count for each severity level (critical, high, medium, low, info)."
+              "expected_behavior": "Returns the total number of open security requirements in the test account's organization and the count for each severity level, from critical to info, plus not applicable and undetermined where any exist."
             }
           ],
           "negative": [
@@ -91,7 +91,7 @@
         "commerce_description": "Oplane does not sell products or process payments through this plugin."
       },
       "publication": {
-        "release_notes": "First directory release (1.1.2): skills to threat-model a project or a pull request with Oplane, assess each security requirement against the code, and record the results in Oplane. This version adds the review test cases and demo recording for directory review, and declares OAuth with dynamic client registration for the MCP server."
+        "release_notes": "1.2.0: skills to threat-model a project or a pull request with Oplane, grade each security requirement's severity from its impact and reachability, assess the requirement against the code, and record the results in Oplane. Since 1.1.2, the skills grade every requirement's severity before they assess its implementation, because Oplane no longer sets a severity when it creates a requirement."
       }
     }
   }

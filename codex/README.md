@@ -10,7 +10,7 @@ This plugin connects your agent to [Oplane](https://www.oplane.com), giving you:
 - **Codebase analysis**: identify security threats across your entire project
 - **PR review**: analyze pull requests for security implications
 - **Implementation assessment**: check if security requirements are properly implemented
-- **Severity management**: adjust requirement severity based on your risk context
+- **Severity grading**: grade each requirement's severity from its impact and reachability, with a rationale
 
 Results are saved to Oplane and visible in the [Gravity web interface](https://gravity.oplane.io).
 
@@ -90,6 +90,8 @@ When you run an analysis, your agent sends Oplane:
 - titles and descriptions of the code or change it is threat modeling, which can include
   short code excerpts
 - git details such as the repository URL, branch, commit SHA and pull request URL
+- the severity it grades for each security requirement, with the impact, reachability and
+  note behind it
 - the assessment it records for each security requirement, with file and line references
 
 The plugin sends nothing to any other service. It has no hooks or scripts that run on your

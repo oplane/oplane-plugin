@@ -83,6 +83,7 @@ For each identified scope, call `new_threat_model` with:
   - What the feature/workflow does from the user's perspective
   - What data flows through it (inputs, outputs, storage)
   - What external services are involved
+  - What security controls it touches (authentication, authorization, rate limits, lockouts) and what is passed into them, naming a secret by where it comes from, not by its value
   - What could go wrong from a security perspective
 
 ### 6. Get Implementation Advice
